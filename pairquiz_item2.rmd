@@ -11,6 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## **Item 1**
 
+
+## **A) Draw a scatter diagram of y(blood pressure rise in millimeters of mercury) versus x(sound pressure level in decibels). Does a simple linear regression model seem reasonable in this situation?
+
     bloodpressure <- c(1,0,1,2,5,1,4,6,2,3,5,4,6,8,4,5,7,9,7,6)
     soundpressure <- c(60,63,65,70,70,70,80,90,80,80,85,89,90,90,90,90,94,100,100,100)
     
@@ -21,7 +24,58 @@ knitr::opts_chunk$set(echo = TRUE)
 
     ![Relationship Between Noise Exposure and Hypertension](https://github.com/RyanPagcatipunan/PairQuiz2-Pagcatipunan-Pulmano-/blob/2f0491235a7f62da1e5647f9124b128a23a8faec/Relatipnship%20between%20Noise%20and%20Hypertension.png)
 
+Seeing that there is a general trend with the given values, a simple linear regression model seems reasonable in this situation
 
+## **B) Fit the simple linear regression model using least linear squares. Find an estimate of σ^2
+
+The Linear Regression model is 
+$$
+Y = β_0 +β_1*x
+$$
+**It can be solved using Rstudio**
+
+Reg <-lm(bloodpressure~soundpressure)
+
+
+The summary is shown below
+
+
+summary(Reg)
+
+```
+Call:
+lm(formula = bloodpressure ~ soundpressure)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.8120 -0.9040 -0.1333  0.5023  2.9310 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   -10.13154    1.99490  -5.079 7.83e-05 ***
+soundpressure   0.17429    0.02383   7.314 8.57e-07 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.318 on 18 degrees of freedom
+Multiple R-squared:  0.7483,	Adjusted R-squared:  0.7343 
+F-statistic:  53.5 on 1 and 18 DF,  p-value: 8.567e-07
+```
+
+Seeing that β_0 = -10.13154 and β_1 = 0.17429, the linear regression model would be
+
+$$
+y = -10.13154 + (0.17429)x_1
+$$
+
+
+**Variance can also be solved using Rstudio**
+
+var(x=soundpressure,y=bloodpressure)
+
+Variance = 28.06316
+
+## **C)Find the predicted mean rise in blood pressure level associated with a sound pressure level of 85 decibels**
 
 
 
