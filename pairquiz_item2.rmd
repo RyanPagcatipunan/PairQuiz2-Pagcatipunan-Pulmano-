@@ -1,0 +1,356 @@
+---
+title: "Module 4 Quiz"
+author: "Tricia Pulmano, Ryan Pagcatipunan"
+date: "7/30/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Item 2**
+
+An article in Optical Engineering reported on the use of an optical correlator to perform an experiment by varying brightness and contrast. The resulting modulation is characterized by the useful range of gray levels. The data follow:
+
+| Useful Range | Brightness | Contrast |
+| -----------: | ---------: | -------: |
+|      96	   |     54	    |    56    |
+|      50	   |     61	    |    80    |
+|      50	   |     65	    |    70    |
+|     112	   |    100	    |    50    |
+|      96	   |    100	    |    65    |
+|      80	   |    100	    |    80    |
+|     155	   |     50	    |    25    |
+|     144	   |     57	    |    35    |
+|     255	   |     54     |    26    |
+
+### **A. Fit a multiple linear regression model to these data.**
+
+Given that there are 2 regressor variables in this item, the multiple linear regression model would be:
+$$
+y = β_0 + β_1x_1 + β_2x_2  
+$$
+where y is the useful range, x~1~ is the brightness variable, and x~2~ being the contrast variable. 
+
+**The multiple linear regression model can be calculated using R:**
+
+    > UsefulRange <- c(96,50,50,112,96,80,155,144,255)
+    > Brightness <- c(54,61,65,100,100,100,50,57,54)
+    > Contrast <- c(56,80,70,50,65,80,25,35,26)
+    > model <- lm(UsefulRange ~ Brightness + Contrast)
+    > summary(model)
+
+**The summary is shown below:**
+
+```
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-32.334 -20.090  -8.451   8.413  69.047 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)   
+(Intercept) 238.5569    45.2285   5.274  0.00188 **
+Brightness    0.3339     0.6763   0.494  0.63904   
+Contrast     -2.7167     0.6887  -3.945  0.00759 **
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 36.35 on 6 degrees of freedom
+Multiple R-squared:  0.7557,	Adjusted R-squared:  0.6742
+
+F-statistic: 9.278 on 2 and 6 DF,  p-value: 0.01459
+```
+
+From this summary, it is found that β~0~ is **238.5569**, β~1~ is **0.3339**, and β~2~ is **-2.7167**. Therefore, the multiple linear regression model is:
+
+$$
+y = 238.5569 + 0.3339x_1  -2.7167x_2  
+$$
+*Practical Interpretation:* This equation can be used to predict useful range for pairs of values of the regressor variables brightness (x~1~) and contrast (x~2~). 
+
+### **B. Estimate σ~2~.**
+
+σ~2~ can be computed by using the estimator of variance formula:
+$$
+σ_2 = \frac{SS_E}{n-p}
+$$
+where SS~E~ is the error or residual sum of squares and the denominator being the the error or residual degrees of freedom.
+
+**σ~2~ is computed through the use of R:**
+
+    > anova <- aov(Gray_Levels ~ Brightness + Contrast)
+    > summary(anova)
+
+**The summary is again shown below:**
+```
+            Df Sum Sq Mean Sq F value  Pr(>F)   
+Brightness   1   3960    3960   2.997 0.13412   
+Contrast     1  20558   20558  15.559 0.00759 **
+Residuals    6   7928    1321                   
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+```
+This output shows the σ~2~ estimate to be equal to **1321**.
+
+### **C. Compute the standard errors of the regression coefficients.**
+
+The estimated standard error is computed through the equation:
+
+$$
+se(β_j) = \sqrt{σ^2C_\text{jj}}
+$$
+where C~jj~ = (X′X)^−1^.
+
+**Using the data from the table above, the X and X' matrices are constructed:**
+
+    > xvalues <- c(1,54,56,1,61,80,1,65,70,1,100,50,1,100,65,1,100,80,1,50,25,1,57,35,1,54,26) 
+    > x <- matrix(xvalues,nrow=9,ncol=3,byrow=TRUE)
+    > x
+    > t(x) 
+    > xtrans <- t(x)
+$$
+X = \begin{bmatrix}
+1 & 54 & 56 \\
+1 & 61 & 80 \\
+1 & 65 & 70 \\
+1 & 100 & 50 \\
+1 & 100 & 65 \\
+1 & 100 & 80 \\
+1 & 50 & 25 \\
+1 & 57 & 35 \\
+1 & 54 & 26
+\end{bmatrix}
+$$
+
+$$
+X'=\begin{bmatrix}
+1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\ 
+54 & 61 & 65 & 100 & 100 & 100 & 50 & 57 & 54\\
+56 & 80 &  70 &  50 &  65  & 80  & 25 &  35  & 26\\
+\end{bmatrix}
+$$
+**X'X is then computed followed by finding its inverse (X'X)^-1^:**
+
+    > xx <- (xtrans %*% x)
+    > xx
+    > xxinv <- solve(xx)
+    > xxinv
+$$
+X'X = \begin{bmatrix}
+9 & 641 & 487\\
+641 & 49527 & 36603\\
+487 & 36603 & 30087\\
+\end{bmatrix}
+$$
+$$
+(X'X)^\text{-1}=\begin{bmatrix}
+1.54821553 & -0.0150363856 &  -0.006767180\\
+-0.01503639  & 0.0003461619 & -0.000177746\\
+-0.00676718 & -0.0001777460 &  0.000359014\\
+\end{bmatrix}
+$$
+Based from the (X'X)^-1^ matrix, C~00~ is **1.54821553**, C~11~ is **0.0003461619**, and  C~22~ is **0.000359014**. Using these values, the standard errors of the regression coefficients can be found:
+
+$$
+se(β_0) = \sqrt{1321(1.54821553)}=45.22380695
+$$
+$$
+se(β_1) = \sqrt{1321(0.0003461619)}=0.6762247185
+$$
+$$
+se(β_2) = \sqrt{1321(0.000359014)}=0.6886635565
+$$
+These resulting standards errors are proven to be correct as the values are the same as the ones in the summary provided by R in part A.
+
+### **D. Predict the useful range when brightness = 80 and contrast = 75**
+
+The useful range can be predicted using the multiple linear regression model in part A: 
+$$
+y = 238.5569 + 0.3339x_1  -2.7167x_2  
+$$
+Since the brightness = 80 and contrast = 75, then **x~1~ = 80** and **x~2~ = 75**. Substituting these values yields the useful range:
+
+$$
+y = 238.5569 + 0.3339(80) - 2.7167(75) = 61.5164 
+$$
+
+### **E. Test for significance of regression using α=0.05. What is the P-value for this test.**
+
+**The hypotheses for ANOVA Test are:**
+
+H~0~: β~1~ = β~2~ = 0
+
+H~1~∶ β~j~ ≠ 0 for at least one j
+
+Rejection of H~0~ implies that at least one of the regressor variables contributes significantly to the model.
+
+**The test statistic is:**
+$$
+F_0= \frac{SS_R/k}{SS_E/(n-p)}=\frac{MS_R}{MS_E}
+$$
+**Reject H~0~ if:** 
+
+f~0~ is greater than f~0.05,2,6~
+
+**Computations:**
+
+In order to find f~0~, SS~T~ must be calculated first using the formula:
+$$
+SS_T = y'y - \frac{(Σ y_i)^2}{n}
+$$
+y'y can be found through R:
+
+    > yvalues <- c(96,50,50,112,96,80,155,144,255)
+    > y <- matrix(yvalues,nrow=9,ncol=1,byrow=TRUE)
+    > y
+    > t(y)
+    
+$$
+y = \begin{bmatrix}
+96 \\ 50 \\50\\112\\96\\80\\155\\144\\255
+\end{bmatrix}
+$$    
+$$
+y' = \begin{bmatrix}
+96 & 50 &50&112&96&80&155&144&255
+\end{bmatrix}
+$$      
+    
+    > ytrans <- t(y)
+    > yy <- (ytrans %*% y)
+
+$$
+y'y = \begin{bmatrix}
+152162
+\end{bmatrix}
+$$     
+**On the other hand, (Σy~i~)^2^ is just equal to:**
+
+**Σy~i~** = 96 + 50 + 50 + 112 + 96 + 80 + 155 + 144 + 255 = 1038
+
+**(Σy~i~)^2^** = (1038)^2^ = **1077444**
+
+With n = 9, SS~T~ is therefore equal to:
+$$
+SS_T = 152162- \frac{1077444}{9} = 32446
+$$
+The value of **SS~E~** can be seen in the summary in part B which is **7928**. SS~R~ will then be calculated:
+
+**SS~R~** = SS~T~ - SS~E~ = 32446 - 7928 = **24518**
+
+Finally f~0~ can be found: 
+$$
+F_0= \frac{24518/2}{7928/(9-3)}=9.277749748
+$$
+**The f critical value can be found using R command:**     
+   
+    > qf(0.05, 2, 6, lower.tail = FALSE)
+    [1] 5.143253
+
+This shows that f~0~ > f~0.05,2,6~ since 9.278 > 5.14.
+
+
+**The p value can also be found using R command:**
+   
+    > pf(9.278, 2, 6, lower.tail = FALSE)
+    [1] 0.0145875
+
+This exhibits that the p value (0.0145875) is less than the significance level of α = 0.05.
+
+**Conclusion:** 
+
+Because f~0~ > f ~0.05,2,6~ = 9.278 (or because the P-value is considerably smaller than α = 0.05), we reject the null hypothesis and conclude that useful range is linearly related to either brightness or contrast, or both.
+
+*Practical Interpretation:* Rejection of H~0~ does not necessarily imply that the relationship found is an appropriate model for predicting useful range as a function of brightness and contrast. Further tests of model adequacy are required before we can be comfortable using this model in practice.
+
+### **F. Construct a t-test on each regression coefficient. What conclusions can you draw about the variables in this model? Use α=0.05.**
+
+#### **Test on Individual Regression Coefficient (β~1~)**
+
+**The hypotheses are:**
+
+H~0~: β~1~ = 0 
+
+H~1~∶ β~1~ ≠ 0 
+
+**The test statistic is:**
+$$
+T_0 = \frac{\hat{β}_j-β_\text{j0}}{\sqrt{σ^2C_\text{jj}}}
+$$
+**Reject H~0~ if:** 
+
+|t~0~| > t~α/2,n-p~
+
+**Computations:**
+
+```
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-32.334 -20.090  -8.451   8.413  69.047 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)   
+(Intercept) 238.5569    45.2285   5.274  0.00188 **
+Brightness    0.3339     0.6763   0.494  0.63904   
+Contrast     -2.7167     0.6887  -3.945  0.00759 **
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 36.35 on 6 degrees of freedom
+Multiple R-squared:  0.7557,	Adjusted R-squared:  0.6742
+
+F-statistic: 9.278 on 2 and 6 DF,  p-value: 0.01459
+```
+Using the summary in part A, it is seen that the **t~0~** for β~1~ is **0.494**.
+
+Through the R command, the critical value is:
+ 
+    > qt(p=.05/2, df=6, lower.tail=FALSE)
+    [1] 2.446912
+
+**Conclusion:**   
+Because |t~0~| < t~0.025,6~, we fail to reject H~0~: β~1~ = 0 and conclude that the variable x~1~ (brightness) does not contribute significantly to the model.
+
+#### **Test on Individual Regression Coefficient (β~2~)**
+
+**The hypotheses are:**
+
+H~0~: β~2~ = 0 
+
+H~1~∶ β~2~ ≠ 0 
+
+**The test statistic is:**
+$$
+T_0 = \frac{\hat{β}_j-β_\text{j0}}{\sqrt{σ^2C_\text{jj}}}
+$$
+**Reject H~0~ if:** 
+
+|t~0~| > t~α/2,n-p~
+
+**Computations:**
+
+Using the summary in part A, it is seen that the **t~0~** for β~2~ is **-3.945**.
+
+Through the R command, the critical value is:
+
+    > qt(p=.05/2, df=6, lower.tail=FALSE)
+    [1] 2.446912
+
+**Conclusion:** 
+
+Because |t~0~| > t~0.025,6~, we reject H~0~: β~2~ = 0 and conclude that the variable x~2~ (contrast) contributes significantly to the model.
+
+## **References**
+https://datatofish.com/multiple-linear-regression-in-r/
+
+https://www.scribbr.com/statistics/anova-in-r/
+
+https://www.geeksforgeeks.org/inverse-of-matrix-in-r/
+
+https://www.statology.org/f-critical-value-r/
+
+https://www.statology.org/how-to-calculate-the-p-value-of-an-f-statistic-in-r/
