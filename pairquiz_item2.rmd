@@ -345,12 +345,12 @@ Through the R command, the critical value is:
 Because |t~0~| > t~0.025,6~, we reject H~0~: β~2~ = 0 and conclude that the variable x~2~ (contrast) contributes significantly to the model.
 
 ## **References**
-https://datatofish.com/multiple-linear-regression-in-r/
+Bevans, R. (2021). “ANOVA in R: A step-by-step guide.” Scribbr. Retrieved from: https://www.scribbr.com/statistics/anova-in-r/
 
-https://www.scribbr.com/statistics/anova-in-r/
+“Example of Multiple Linear Regression in R.” (2020). Data to Fish. Retrieved from: https://datatofish.com/multiple-linear-regression-in-r/
 
-https://www.geeksforgeeks.org/inverse-of-matrix-in-r/
+“Inverse of Matrix in R.” (2020). GeeksforGeeks. Retrieved from: https://www.geeksforgeeks.org/inverse-of-matrix-in-r/
 
-https://www.statology.org/f-critical-value-r/
+Zach. (2019). “How to Calculate the P-Value of an F-Statistic in R.” Statology. Retrieved from: https://www.statology.org/how-to-calculate-the-p-value-of-an-f-statistic-in-r/
 
-https://www.statology.org/how-to-calculate-the-p-value-of-an-f-statistic-in-r/
+Zach. (2020). “How to Find the F Critical Value in R.” Statology. Retrieved from: https://www.statology.org/f-critical-value-r/  
