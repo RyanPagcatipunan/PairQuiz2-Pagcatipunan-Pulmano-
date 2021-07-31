@@ -159,6 +159,20 @@ $$
 σ^2 = 1.737026
 $$
 
+## **C)Find the predicted mean rise in blood pressure level associated with a sound pressure level of 85 decibels**
+
+This question can be solved using the linear regression model
+Using β_0 = -10.13154, β_1 = 0.17429 and the x value of 85 decibels, the updated linear regression model would be
+
+$$
+y = -10.13154 + (0.17429)*85
+$$
+
+The predicted blood pressure level associated with 85 decibels would be
+$$
+Y = 4.68311
+$$
+
 
 ## **Item 2**
 
