@@ -1,4 +1,0 @@
-Pagcatipunan, Ryan
-Pulmano, Tricia
-
-
