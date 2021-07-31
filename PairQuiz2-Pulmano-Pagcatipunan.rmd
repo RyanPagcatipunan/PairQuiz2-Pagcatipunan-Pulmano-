@@ -40,22 +40,16 @@ An article in the Journal of Sound and VIbration described a study investigating
     
 **A scatter plot could be made using R:**
 
-<<<<<<< HEAD
-    plot(soundpressure,bloodpressure,main="Relationship Between Noise Exposure and Hypertension", xlab="Sound Pressure Level in Decibels", ylab="Blood Pressure rise in mm/Hg", las=1)
-=======
+
+    > plot(soundpressure,bloodpressure,main="Relationship Between Noise Exposure and Hypertension", xlab="Sound Pressure Level in Decibels", ylab="Blood Pressure rise in mm/Hg", las=1)
     > bloodpressure <- c(1,0,1,2,5,1,4,6,2,3,5,4,6,8,4,5,7,9,7,6)
     > soundpressure <- c(60,63,65,70,70,70,80,90,80,80,85,89,90,90,90,90,94,100,100,100)
     > plot(bloodpressure,soundpressure,main="Relationship Between Noise Exposure and Hypertension", xlab="Sound Pressure Level in Decibels", ylab="Blood Pressure rise in mm/Hg", las=1)
->>>>>>> 453460c8d2b01d56bb36aaf901f6675ae53a2aba
 
 **The scatter plot is shown below:**
-![Relationship Between Noise Exposure and Hypertension](https://github.com/RyanPagcatipunan/PairQuiz2-Pagcatipunan-Pulmano-/blob/b61289d18b804c98198015a339c3db45cd5a054e/ScatterplotNoiseHypertension.png)
+![Relationship Between Noise Exposure and Hypertension](https://github.com/RyanPagcatipunan/PairQuiz2-Pagcatipunan-Pulmano-/blob/main/ScatterplotNoiseHypertension.png)
 
-<<<<<<< HEAD
-    ![Relationship Between Noise Exposure and Hypertension](https://github.com/RyanPagcatipunan/PairQuiz2-Pagcatipunan-Pulmano-/blob/453460c8d2b01d56bb36aaf901f6675ae53a2aba/ScatterplotNoiseHypertension.png)
-=======
 Seeing that there is a general trend with the given values, a simple linear regression model seems reasonable in this situation.
->>>>>>> 453460c8d2b01d56bb36aaf901f6675ae53a2aba
 
 ### **B. Fit the simple linear regression model using least linear squares. Find an estimate of σ^2^**
 
@@ -137,9 +131,6 @@ $$
 
 Here it can be seen that SS~E~ is 31.2664771 ≈ **31.2665**.
 
-<<<<<<< HEAD
-(summary(Reg)$sigma)**2
-=======
 With n = 20, σ^2^ can now be calculated: 
 
 $$
@@ -153,22 +144,17 @@ This value computed is indeed σ^2^ as this same value is retrieved when using R
 
 ### **C. Find the predicted mean rise in blood pressure level associated with a sound pressure level of 85 decibels.**
 
->>>>>>> 453460c8d2b01d56bb36aaf901f6675ae53a2aba
-
+This question can be solved using the linear regression model we got in part B: 
 $$
-σ^2 = 1.737026
-$$
-
-## **C)Find the predicted mean rise in blood pressure level associated with a sound pressure level of 85 decibels**
-
-This question can be solved using the linear regression model
-Using β_0 = -10.13154, β_1 = 0.17429 and the x value of 85 decibels, the updated linear regression model would be
-
-$$
-y = -10.13154 + (0.17429)*85
+y = -10.13154 + (0.17429)x_1
 $$
 
-The predicted blood pressure level associated with 85 decibels would be
+**Since the sound pressure level is 85 decibels, then x = 85 and so the equation would be:**
+$$
+y = -10.13154 + (0.17429)85
+$$
+
+The predicted blood pressure level associated with 85 decibels would be:
 $$
 Y = 4.68311
 $$
