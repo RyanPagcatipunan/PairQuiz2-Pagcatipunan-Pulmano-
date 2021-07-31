@@ -512,9 +512,15 @@ Because |t~0~| > t~0.025,6~, we reject H~0~: β~2~ = 0 and conclude that the var
 ## **References**
 Bevans, R. (2021). “ANOVA in R: A step-by-step guide.” Scribbr. Retrieved from: https://www.scribbr.com/statistics/anova-in-r/
 
+Cellio, M. (2013, February 19). How do i print the variance of an lm in r without computing from the standard error by hand? Stack Overflow. https://stackoverflow.com/questions/14960868/how-do-i-print-the-variance-of-an-lm-in-r-without-computing-from-the-standard-er. 
+
 “Example of Multiple Linear Regression in R.” (2020). Data to Fish. Retrieved from: https://datatofish.com/multiple-linear-regression-in-r/
 
 “Inverse of Matrix in R.” (2020). GeeksforGeeks. Retrieved from: https://www.geeksforgeeks.org/inverse-of-matrix-in-r/
+
+YouTube. (2014). Scatterplot in RStudio. YouTube. https://www.youtube.com/watch?v=A9hAp9AGc0s. 
+
+YouTube. (2013). Scatterplots in R | R Tutorial 2.7 | MarinStatsLectures. YouTube. https://www.youtube.com/watch?v=FEAS3akVxD8. 
 
 Zach. (2019). “How to Calculate the P-Value of an F-Statistic in R.” Statology. Retrieved from: https://www.statology.org/how-to-calculate-the-p-value-of-an-f-statistic-in-r/
 
