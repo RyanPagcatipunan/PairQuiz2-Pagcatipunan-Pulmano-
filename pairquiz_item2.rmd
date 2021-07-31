@@ -49,7 +49,7 @@ An article in the Journal of Sound and VIbration described a study investigating
 >>>>>>> 453460c8d2b01d56bb36aaf901f6675ae53a2aba
 
 **The scatter plot is shown below:**
-![Relationship Between Noise Exposure and Hypertension](https://github.com/RyanPagcatipunan/PairQuiz2-Pagcatipunan-Pulmano-/blob/2f0491235a7f62da1e5647f9124b128a23a8faec/Relatipnship%20between%20Noise%20and%20Hypertension.png)
+![Relationship Between Noise Exposure and Hypertension](https://github.com/RyanPagcatipunan/PairQuiz2-Pagcatipunan-Pulmano-/blob/b61289d18b804c98198015a339c3db45cd5a054e/ScatterplotNoiseHypertension.png)
 
 <<<<<<< HEAD
     ![Relationship Between Noise Exposure and Hypertension](https://github.com/RyanPagcatipunan/PairQuiz2-Pagcatipunan-Pulmano-/blob/453460c8d2b01d56bb36aaf901f6675ae53a2aba/ScatterplotNoiseHypertension.png)
@@ -159,20 +159,6 @@ $$
 σ^2 = 1.737026
 $$
 
-
-## **C)Find the predicted mean rise in blood pressure level associated with a sound pressure level of 85 decibels**
-
-This question can be solved using the linear regression model
-Using β_0 = -10.13154, β_1 = 0.17429 and the x value of 85 decibels, the updated linear regression model would be
-
-$$
-y = -10.13154 + (0.17429)*85
-$$
-
-The predicted blood pressure level associated with 85 decibels would be
-$$
-Y = 4.68311
-$$
 
 ## **Item 2**
 
